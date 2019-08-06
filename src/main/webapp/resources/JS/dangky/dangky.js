@@ -105,7 +105,7 @@ function btnSave1() {
 			},
 			success : function(data) {
 				if (data.status ==0) {
-					alert(data);
+					alert(data.success);
 					return;
 				}else{
 					authentic=data.check;

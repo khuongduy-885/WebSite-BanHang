@@ -1,4 +1,4 @@
-package com.khuongduy.common.command;
+package com.khuongduy.common;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

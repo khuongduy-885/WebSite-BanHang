@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.khuongduy.common.command.UitiuCommon;
+import com.khuongduy.common.UitiuCommon;
 import com.khuongduy.entity.ObjCheck;
 import com.khuongduy.entity.Users;
 import com.khuongduy.sevice.UsersSevice;
