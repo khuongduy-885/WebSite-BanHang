@@ -56,47 +56,49 @@ p {
 					<span id="checkfirst_name" style="color: red"></span><br> <span
 						id="checkemail" style="color: red"></span><br> <span
 						id="checkcreat_password" style="color: red"></span>
-						<div id="datadangky">
-					<div class="form-group">
-						<label>Tên trước*</label> <input type="text" name="LastName"
-							id="last_name" class="form-control" placeholder="Họ">
+					<div id="datadangky">
+						<div class="form-group">
+							<label>Tên trước*</label> <input type="text" name="LastName"
+								id="last_name" class="form-control" placeholder="Họ">
+						</div>
+						<div class="form-group">
+							<label>Tên sau*</label> <input type="text" class="form-control"
+								name="FirstName" id="first_name" placeholder="Tên">
+						</div>
+						<div class="form-group">
+							<label>Email*</label> <input onblur="checkemail1()" type="text"
+								class="form-control" name="email" id="email" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Password*</label> <input
+								type="password" class="form-control" onblur="checkpass()"
+								name="password" id="creat_password" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Password*</label> <input
+								type="password" class="form-control" onblur="checkenterpass()"
+								name="" id="creat_password1" placeholder="Nhập lại password">
+						</div>
+						<div class="checkbox">
+							<label> <input type="checkbox"> Đăng kí nhận tin
+								mới
+							</label>
+						</div>
 					</div>
-					<div class="form-group">
-						<label>Tên sau*</label> <input type="text" class="form-control"
-							name="FirstName" id="first_name" placeholder="Tên">
-					</div>
-					<div class="form-group">
-						<label>Email*</label> <input onblur="checkemail1()" type="text"
-							class="form-control" name="email" id="email" placeholder="Email">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Password*</label> <input
-							type="password" class="form-control" onblur="checkpass()"
-							name="password" id="creat_password" placeholder="Password">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Password*</label> <input
-							type="password" class="form-control" onblur="checkenterpass()"
-							name="" id="creat_password1" placeholder="Nhập lại password">
-					</div>
-					<div class="checkbox">
-						<label> <input type="checkbox"> Đăng kí nhận tin
-							mới
-						</label>
-					</div>
-					</div>
-					
 					<div class="form-group" id="dataxacthuc" style="display: none">
-					<span id="xacnhanchemail"></span> <br>
-						<label>Mã xác thực*</label> <input type="number"
-							class="form-control" name="email" id="email" placeholder="Mã xác thực">
+						<span id="checkxacnhanchemail" style="color: red;display: none"></span> <span id="xacnhanchemail"></span> <span id="s"></span><br>
+						<a id="sendxacnhan" style="display: none" onclick="sendxacnhan()">gửi lại mã xác nhận !</a><br>
+						<label>Mã xác thực*</label><input type="number"
+							class="form-control" name="maxacnhan" id="maxacnhan"
+							placeholder="Mã xác thực"><br>
 					</div>
 					<div class="form-group">
-						<button id="btndangky" type="button" class="btn btn-default stl_btn_reg"
-							onclick="btnSave1()">Đăng kí</button>
-						<button id="btnxacnhan" onclick="window.location='/account/login'"
-							style="display: none" type="submit"
-							class="btn btn-default stl_btn_reg">xác thực email</button> 
+						<button id="btndangky" type="button"
+							class="btn btn-default stl_btn_reg" onclick="btnSave1()">Đăng
+							kí</button>
+						<button id="btnxacnhan" onclick="btnxacnhan1()"
+							style="display: none" type="button"
+							class="btn btn-default stl_btn_reg">xác thực email</button>
 						<!--  <button onclick="window.location='/WebBanHang/login'"
 							style="float: right;" type="btn"
 							class="btn btn-default stl_btn_reg">Quay lại</button>  -->

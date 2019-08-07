@@ -67,8 +67,29 @@ var hoten;
 var email;
 var matkhau;
 var authentic;
+var maxn;
+var s = null; // Giây
+var timeout = null; // Timeout
+function start()
+{
+    if(s===null){
+    	s = parseInt(59);
+    }
+    if (s == -1){
+    	authentic="";
+    	document.getElementById('s').innerText = "";
+        clearTimeout(timeout);
+        return false;
+    }
+    document.getElementById('s').innerText = s.toString();
+    timeout = setTimeout(function(){
+        s--;
+        start();
+    }, 1000);
+}
+
 function btnSave1() {
-	/*if ($("#first_name").val() == "") {
+	if ($("#first_name").val() == "") {
 		$("#checkfirst_name").html("<i>*Họ tên không được để trống !</i>");
 		check = 2;
 		return;
@@ -87,16 +108,15 @@ function btnSave1() {
 		$("#checkcreat_password").text("*Mật khẩu khong duoc de trong !");
 		check = 2;
 		return;
-	}*/
+	}
+	hoten = $("#last_name").val().trim() + " " + $("#first_name").val().trim();
+	email = $("#email").val();
+	matkhau = $("#creat_password").val();
 	$("#btnxacnhan").css("display","block");
 	$("#dataxacthuc").css("display","block");
 	$("#btndangky").css("display","none");
 	$("#datadangky").css("display","none");
-	hoten = $("#last_name").val().trim() + " " + $("#first_name").val().trim();
-	email = $("#email").val();
-	matkhau = $("#creat_password").val();
-
-	/*if (check == 1) {*/
+	if (check == 1) {
 		$.ajax({
 			url : "/WebBanHang/xacthucmail",
 			type : "POST",
@@ -109,26 +129,61 @@ function btnSave1() {
 					return;
 				}else{
 					authentic=data.check;
+					start();
 					$("#xacnhanchemail").html("<i>Mã xác thực đã được gửi đến email của bạn !</i>")
 				}
 			}
 		})
-//	}
+	}
 };
-function btnxacnhan() {
+function sendxacnhan() {
+		$.ajax({
+			url : "/WebBanHang/xacthucmail",
+			type : "POST",
+			data : {
+				email : email,
+			},
+			success : function(data) {
+				if (data.status ==0) {
+					alert(data.success);
+					return;
+				}else{
+					start();
+					authentic=data.check;
+					$("#checkxacnhanchemail").css("display","none");
+					$("#sendxacnhan").css("display","none");
+					$("#xacnhanchemail").html("<i>Mã xác thực đã được gửi đến email của bạn !</i>");
+				}
+			}
+		})
+};
+function btnxacnhan1() {
+	if(authentic=="" || authentic== undefined){
+		$("#xacnhanchemail").html("");
+		$("#checkxacnhanchemail").css("display","block");
+		$("#checkxacnhanchemail").html("<i>Mã xác thực không còn hiệu lực,click gửi lại mã để nhận mã mới !</i>");
+		$("#sendxacnhan").css("display","block");
+		return;
+	}
+	clearTimeout(timeout);
+	maxn=$("#maxacnhan").val();
 	$.ajax({
 		url : "/WebBanHang/themthanhvien",
 		type : "POST",
 		data : {
-			
+			fullname :hoten,
+			email:email,
+			pass:matkhau,
+			authentic:authentic,
+		 maxn:maxn
 		},
 		success : function(data) {
-			if (data === "đang ky thành công") {
-				alert(data);
-				window.location = "/WebBanHang/login";
-			} else {
-				alert(data);
-				location.reload();
+			if (data.status ==0) {
+				alert(data.success);
+				return;
+			}else{
+				authentic=data.check;
+				alert(data.success);
 			}
 		}
 	})

@@ -85,44 +85,50 @@ public class SignInController
 
 	@RequestMapping(value = "/themthanhvien", method = RequestMethod.POST)
 	@ResponseBody
-	public String dangky(HttpServletRequest request, HttpServletResponse response, @RequestParam String fullname, @RequestParam String email,
-			@RequestParam String pass, Model model) throws SQLException
+	public ObjCheck dangky(HttpServletRequest request, HttpServletResponse response, 
+			@RequestParam String fullname, @RequestParam String email,
+			@RequestParam String pass,@RequestParam String authentic,
+			@RequestParam String maxn,Model model) throws SQLException
 	{
-		// List<Users> list= userSeviceImpl.fileall();
-		// for (Users userss : list) {
-		// String name = userss.getUsername();
-		// if(username.equals(name)) {
-		// model.addAttribute("trungten", "ten dang nhap da ton tai !");
-		// }else {}
-		// }
+		ObjCheck objCheck = new ObjCheck();
+		UitiuCommon maHoaAES = new UitiuCommon();
+		String decryptedString = maHoaAES.decrypt(authentic).substring(0, 6);
 		Users users = new Users();
 		users.setEmail(email);
 		users.setPass(pass);
 		users.setFullname(fullname);
-		boolean ktdangky = userSeviceImpl.themnhanvien(users);
-		if (ktdangky == true)
+		try
 		{
-			String success = "đang ky thành công";
-			return success;
-		} else
-		{
-			String success = "mail đã được sử dụng";
-			return success;
+			if(maxn.equals(decryptedString)) {
+				boolean ktdangky = userSeviceImpl.themnhanvien(users);
+				if(ktdangky) {
+					objCheck.setStatus(1);
+					objCheck.setSuccess("đăng ký thành công !");
+				}else {
+					throw new Exception("đăng không thành công !");
+				}
+			}else {
+				throw new Exception("Mã xác nhận không đúng");
+			}
+		} catch (Exception e)
+		{	
+			objCheck.setStatus(0);
+			objCheck.setSuccess(""+e);
+			return objCheck;
 		}
+		
+		return objCheck;
 
 	}
-
 	public void sendPlainTextEmail(String host, String port, final String userName, final String password, String toAddress, String subject, String message)
 			throws AddressException, MessagingException
 	{
-
 		// sets SMTP server properties
 		Properties properties = new Properties();
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.port", port);
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.starttls.enable", "true");
-
 		// creates a new session with an authenticator
 		Authenticator auth = new Authenticator() {
 			public PasswordAuthentication getPasswordAuthentication()
@@ -130,12 +136,9 @@ public class SignInController
 				return new PasswordAuthentication(userName, password);
 			}
 		};
-
 		Session session = Session.getInstance(properties, auth);
-
 		// creates a new e-mail message
 		Message msg = new MimeMessage(session);
-
 		msg.setFrom(new InternetAddress(userName));
 		InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
 		msg.setRecipients(Message.RecipientType.TO, toAddresses);
@@ -143,7 +146,6 @@ public class SignInController
 		msg.setSentDate(new Date());
 		// set plain text message
 		msg.setText(message);
-
 		// sends the e-mail
 		Transport.send(msg);
 
