@@ -85,6 +85,7 @@ p {
 						</label>
 					</div>
 					</div>
+					
 					<div class="form-group" id="dataxacthuc" style="display: none">
 					<span id="xacnhanchemail"></span> <br>
 						<label>Mã xác thực*</label> <input type="number"
