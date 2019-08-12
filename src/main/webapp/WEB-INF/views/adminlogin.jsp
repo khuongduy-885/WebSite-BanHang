@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"></jsp:include>
+<script type="text/javascript"
+	src="<c:url value="/resources/JS/jstemblates/login.js"/>"></script>
 <style>
 .mar15 {
     margin-top: 30px;
@@ -92,31 +94,27 @@ label {
 				<div class="log_lf">
 					<h4>đăng nhập</h4>
 					<p style="width: 100%;">Nếu bạn có một tài khoản, xin vui lòng đăng nhập.</p>
-					<form accept-charset="UTF-8" action="/account/login"
-						id="customer_login" method="post">
-						<input name="FormType" type="hidden" value="customer_login">
-						<input name="utf8" type="hidden" value="true">
+					<form accept-charset="UTF-8" action="" method="post">
 
 						<div class="form-group">
 							<label style="color: darkgray">E-mail</label> <input type="email" class="form-control"
-								name="email" placeholder="Email">
+								id="email" name="email" placeholder="Email">
 						</div>
 						<div class="form-group">
 							<label style="color: darkgray">Password</label> <input type="password" name="password"
-								class="form-control" placeholder="Password">
+								id="pass" class="form-control" placeholder="Password">
 						</div>
 						<div class="form-group">
 							<a href="#recover"
 								onclick="showRecoverPasswordForm();return false;"
 								id="RecoverPassword">Quên mật khẩu ?</a>
 						</div>
+					
 						<div class="form-group">
-							<button type="submit" class="btn">
-								<span>đăng nhập</span>
-							</button>
+								<input type="button" value="dangnhap" onclick="btnSave1()"/>
 						</div>
 					</form>
-					<div id="recover_password" style="display: none;">
+					<!-- <div id="recover_password" style="display: none;">
 						<h3>Đặt lại mật khẩu</h3>
 						<p id="intro note-reset">Chúng tôi sẽ gửi cho bạn một email để
 							kích hoạt việc đặt lại mật khẩu.</p>
@@ -135,7 +133,7 @@ label {
 									onclick="hideRecoverPasswordForm();return false;">Hủy</a>
 							</p>
 						</form>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<!-- end col-6 -->

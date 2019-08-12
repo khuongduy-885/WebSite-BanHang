@@ -1,7 +1,9 @@
 package com.khuongduy.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.khuongduy.common.UitiuCommon;
 import com.khuongduy.entity.ObjCheck;
@@ -35,19 +38,19 @@ public class SignInController
 
 	@Autowired
 	UsersSevice userSeviceImpl;
-
-	/*@Autowired
-	UitiuCommon maHoaAES;*/
-
-	/*
-	 * @RequestMapping("/signin")
-	 * 
-	 * @GetMapping
-	 */
+	
+	@Autowired
+	LogInController logInController;
+	
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public String signIn()
 	{
-		return "adminsignin";
+		if(logInController.checklogin) {
+			return "adminsignin";
+		}else {
+			return "redirect:login";
+		}
+		
 	}
 
 	@RequestMapping(value = "/xacthucmail", method = RequestMethod.POST)
@@ -67,6 +70,10 @@ public class SignInController
 		String originalString = maHoaAES.maRanDom();
 		String encryptedString = maHoaAES.encrypt(originalString);
 		String message = "Xin chào"+mailTo+"đây là mã xác nhận của bạn: "+originalString.substring(0, 6);
+		Users user1= new Users();
+		user1.setEmail(email);
+		user1.setHoten(password);
+		user1.setMatkhau(mailFrom);
 		try
 		{
 			sendPlainTextEmail(host, port, mailFrom, password, mailTo, subject, message);
