@@ -6,8 +6,10 @@ import java.sql.SQLException;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,25 +44,25 @@ public class LogInController {
 			throws SQLException, AddressException, MessagingException
 	{
 		ObjCheck objCheck = new ObjCheck();
+		HttpSession session= request.getSession();
 		try
 		{
 			String email1="khuongduy885@gmail.com";
 			String pass1="12345678";
 		
 			if(email1.equals(email) && pass.equals(pass1)){
+				Cookie[] cookies = request.getCookies();
 				objCheck.setStatus(1);
 				objCheck.setSuccess("đăng nhập thành công !");
-				checklogin =true;
+				session.setAttribute("isLogin", cookies[0].getValue());
 			}else {
 				objCheck.setStatus(0);
 				objCheck.setSuccess("email hoặc pass k đúng !");
-				checklogin =false;
 			}
 		} catch (Exception e)
 		{	
 			objCheck.setStatus(0);
 			objCheck.setSuccess("không gửi được email" + e);
-			checklogin =false;
 			return objCheck;
 		}
 		return objCheck;

@@ -45,12 +45,7 @@ public class SignInController
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public String signIn()
 	{
-		if(logInController.checklogin) {
 			return "adminsignin";
-		}else {
-			return "redirect:login";
-		}
-		
 	}
 
 	@RequestMapping(value = "/xacthucmail", method = RequestMethod.POST)

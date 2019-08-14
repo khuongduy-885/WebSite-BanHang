@@ -36,6 +36,47 @@
 p {
 	margin: 0 0 10px;
 }
+
+//
+loader /* html
+ <div style ="padding: 20px"> <div id ="overlay" onclick ="off()"> <div style
+	="margin-left: 50%;margin-top: 10%" class ="loader"> </div> </div><!--
+	<input type ="button" value ="an/hien" onclick ="on()"/>--> </div> */ 
+	.loader {
+	border: 6px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 6px solid #3498db;
+	/* border-right: 6px solid #f3f3f3;
+    border-bottom: 6px solid #1b1b33;  */
+	width: 50px;
+	height: 50px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 1.5s linear infinite;
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+#overlay {
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.005);
+	z-index: 2;
+	cursor: pointer;
+}
+//
+end
 </style>
 <div class="mar15">
 	<div class="container">
@@ -85,12 +126,20 @@ p {
 							</label>
 						</div>
 					</div>
+					<div style="padding: 20px">
+						<div id="overlay" onclick="off()">
+							<div style="margin-left: 50%; margin-top: 10%" class="loader"></div>
+						</div>
+						<!-- <input type="button" value="an/hien" onclick="on()"/> -->
+					</div>
+
 					<div class="form-group" id="dataxacthuc" style="display: none">
-						<span id="checkxacnhanchemail" style="color: red;display: none"></span> <span id="xacnhanchemail"></span> <span id="s"></span><br>
-						<a id="sendxacnhan" style="display: none" onclick="sendxacnhan()">gửi lại mã xác nhận !</a><br>
-						<label>Mã xác thực*</label><input type="number"
-							class="form-control" name="maxacnhan" id="maxacnhan"
-							placeholder="Mã xác thực"><br>
+						<span id="checkxacnhanchemail" style="color: red; display: none"></span>
+						<span id="xacnhanchemail"></span> <span id="s"></span><br> <a
+							id="sendxacnhan" style="display: none" onclick="sendxacnhan()">gửi
+							lại mã xác nhận !</a><br> <label>Mã xác thực*</label><input
+							type="number" class="form-control" name="maxacnhan"
+							id="maxacnhan" placeholder="Mã xác thực"><br>
 					</div>
 					<div class="form-group">
 						<button id="btndangky" type="button"

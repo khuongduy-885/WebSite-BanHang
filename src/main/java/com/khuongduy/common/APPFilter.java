@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class APPFilter implements Filter
 {
@@ -22,6 +23,10 @@ public class APPFilter implements Filter
 	{
 		// TODO Auto-generated method stub
 		request.getParameter("");
+		/*HttpSession session = ((Object) request).getSession();
+        boolean isLogined = session.getAttribute("isLogin") != null ? (Boolean) session
+                .getAttribute("isLogin") : false;*/
+		
 		chain.doFilter(request, response);
 		
 	}
