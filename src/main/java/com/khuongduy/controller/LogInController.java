@@ -61,6 +61,7 @@ public class LogInController {
 		{	
 			objCheck.setStatus(0);
 			objCheck.setSuccess(e.getMessage());
+			objCheck.setSuccess("không gửi được email" + e);
 			return objCheck;
 		}
 		return objCheck;

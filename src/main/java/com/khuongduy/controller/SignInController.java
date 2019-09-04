@@ -45,24 +45,9 @@ public class SignInController
 	@RequestMapping(value = "/signin", method = {RequestMethod.GET,RequestMethod.POST})
 	public String signIn()
 	{
-//		if(logInController.checklogin) {
 			return "adminsignin";
-		/*}else {
-			return "redirect:login";
-		}*/
 		
 	}
-	@RequestMapping(value = "/chuyenlink", method = {RequestMethod.GET,RequestMethod.POST})
-	public String chuyenlink()
-	{
-//		if(logInController.checklogin) {
-		return "redirect:signin";
-		/*}else {
-			
-		}*/
-		
-	}
-
 	@RequestMapping(value = "/xacthucmail", method = RequestMethod.POST)
 	@ResponseBody
 	public ObjCheck xacThucEnail(HttpServletRequest request, HttpServletResponse response, @RequestParam String email, Model model)

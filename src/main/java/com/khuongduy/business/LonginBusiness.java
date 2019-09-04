@@ -17,6 +17,11 @@ public class LonginBusiness {
 		Users users = new Users();
 		try {
 			 users =usersSevice.kiemtradangnhap(username, pass);
+			/* if(users.getEmail().equals(username)&&users.getPass().equals(pass)) {
+				 HttpSession session= request.getSession();
+					Cookie[] cookie= request.getCookies();
+					session.setAttribute("checklogin", cookie[0].getValue());
+			 }*/
 		}catch (Exception e) {
 			throw e;
 		}

@@ -1,4 +1,5 @@
 /*function isNumberKey(evt){
+
 	var charCode = (evt.which) ? evt.which : event.keyCode;
 	  if (charCode > 31 && (charCode > 57 || charCode < 48 )){
   return false;
@@ -17,6 +18,13 @@
  $("#checkusernumber").text("");
  }
  };*/
+/*function on() {
+	//document.getElementById("overlay").style.display = "none";
+}
+
+function off() {
+//  document.getElementById("overlay").style.display = "none";
+}*/
 var check = 1;
 function checkemail1() {
 	var email = $("#email").val();
@@ -117,6 +125,7 @@ function btnSave1() {
 	$("#btndangky").css("display","none");
 	$("#datadangky").css("display","none");
 	if (check == 1) {
+		document.getElementById("overlay").style.display = "block";
 		$.ajax({
 			url : "/WebBanHang/xacthucmail",
 			type : "POST",
@@ -125,10 +134,12 @@ function btnSave1() {
 			},
 			success : function(data) {
 				if (data.status ==0) {
+					document.getElementById("overlay").style.display = "none";
 					alert(data.success);
 					return;
 				}else{
 					authentic=data.check;
+					document.getElementById("overlay").style.display = "none";
 					start();
 					$("#xacnhanchemail").html("<i>Mã xác thực đã được gửi đến email của bạn !</i>")
 				}
