@@ -22,7 +22,7 @@ public class DanhMucDaoImpl implements DanhMucDao {
 	@Resource(name = "dataSource")
 	private DataSource dataSource;
 	
-	public List<DanhMuc> fileall() {
+	public List<DanhMuc> fileall() throws Exception {
 		String query ="select madanhmuc,tendanhmuc from danhmuc";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -45,21 +45,23 @@ public class DanhMucDaoImpl implements DanhMucDao {
 			
 		}  catch (Exception e) {
 			e.printStackTrace();
+			throw new Exception(e); 
 		} finally {
-			try {
+			if(pstmt !=null) {
 				pstmt.close();
-			} catch (SQLException e) {
 			}
-			try {
+			if(conn !=null) {
 				conn.close();
-			} catch (SQLException e) {
+			}
+			if(rs !=null) {
+				rs.close();
 			}
 		}
 		return danhMucs;
 		
 	}
 
-	public DanhMuc dsdmtheoma(int madanhmuc) {
+	public DanhMuc dsdmtheoma(int madanhmuc) throws Exception {
 		String query ="select madanhmuc,tendanhmuc from danhmuc where madanhmuc= (?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -82,19 +84,20 @@ public class DanhMucDaoImpl implements DanhMucDao {
 		}  catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
+			if(pstmt !=null) {
 				pstmt.close();
-			} catch (SQLException e) {
 			}
-			try {
+			if(conn !=null) {
 				conn.close();
-			} catch (SQLException e) {
+			}
+			if(rs !=null) {
+				rs.close();
 			}
 		}
 		return danhMuc;
 	}
 
-	public boolean themdanhmuc(DanhMuc danhMuc) {
+	public boolean themdanhmuc(DanhMuc danhMuc) throws Exception {
 		StringBuilder sql =new StringBuilder( "INSERT INTO danhmuc (tendanhmuc) VALUES (?)");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -113,19 +116,20 @@ public class DanhMucDaoImpl implements DanhMucDao {
 			}  catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				try {
+				if(pstmt !=null) {
 					pstmt.close();
-				} catch (SQLException e) {
 				}
-			try {
+				if(conn !=null) {
 					conn.close();
-				} catch (SQLException e) {
+				}
+				if(rs !=null) {
+					rs.close();
 				}
 			}
 			return false;
 	}
 
-	public boolean capnhatdanhmuc(DanhMuc danhMuc) {
+	public boolean capnhatdanhmuc(DanhMuc danhMuc) throws Exception {
 		String sql = "UPDATE danhmuc SET tendanhmuc = ? WHERE madanhmuc = ? ";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -138,19 +142,17 @@ public class DanhMucDaoImpl implements DanhMucDao {
 			}  catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				try {
+				if(pstmt !=null) {
 					pstmt.close();
-				} catch (SQLException e) {
 				}
-			try {
+				if(conn !=null) {
 					conn.close();
-				} catch (SQLException e) {
 				}
 			}
 		return true;
 	}
 
-	public boolean xoadanhmuc(int madanhmuc) {
+	public boolean xoadanhmuc(int madanhmuc) throws Exception {
 		String sql = "DELETE FROM danhmuc WHERE madanhmuc = ? ";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -163,13 +165,11 @@ public class DanhMucDaoImpl implements DanhMucDao {
 			}  catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				try {
+				if(pstmt !=null) {
 					pstmt.close();
-				} catch (SQLException e) {
 				}
-			try {
+				if(conn !=null) {
 					conn.close();
-				} catch (SQLException e) {
 				}
 			}
 		return true;

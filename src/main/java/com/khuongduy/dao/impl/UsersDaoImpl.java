@@ -49,8 +49,8 @@ public class UsersDaoImpl implements UsersDao {
 		}
 	}
 	
-	public Users kiemtradangnhap(String username, String pass) {
-		String sql="select username,idrole from users where username=(?) and pass=(?)";	
+	public Users kiemtradangnhap(String username, String pass) throws Exception {
+		String sql="select username,idrole from users where email=(?) and pass=(?)";	
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -64,21 +64,23 @@ public class UsersDaoImpl implements UsersDao {
 			if(rs !=null) {
 				while(rs.next()) {
 					
-					/*users.setUsername(rs.getString("username"));
-					users.setIdrole(rs.getInt("idrole"));*/
+					users.setEmail(rs.getString("email"));
+					users.setPass(rs.getString("pass"));
 			}
 		}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new Exception(e);
 		} finally {
-			try {
+			if(pstmt !=null) {
 				pstmt.close();
-			} catch (SQLException e) {
 			}
-			try {
+			if(conn !=null) {
 				conn.close();
-			} catch (SQLException e) {
+			}
+			if(rs !=null) {
+				rs.close();
 			}
 		}
 		return users;

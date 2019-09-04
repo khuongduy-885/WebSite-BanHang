@@ -47,14 +47,14 @@ public class ApiController {
 	@Autowired
 	ChiTietSanPhamSeviceImpl chiTietSanPhamSeviceImpl;
 //	-----------------------DangNhap-------------
-	@GetMapping("KiemTraDangNhap")
+	/*@GetMapping("KiemTraDangNhap")
 	@ResponseBody
 	public Users KiemTraDangNhap(@RequestParam String username, @RequestParam String pass, ModelMap modelMap) {
 		Users kiemtra= userSeviceImpl.kiemtradangnhap(username, pass);
-		/*kiemtra.getUsername();
-		kiemtra.getIdrole();*/
+		kiemtra.getUsername();
+		kiemtra.getIdrole();
 	return kiemtra;
-	}
+	}*/
 //	 ---------------------dangky---------------
 //	@PostMapping("dangky")
 //	@ResponseBody
@@ -69,7 +69,7 @@ public class ApiController {
 //	}
 //	
 //------------------themdanhmuc------------------
-	@PostMapping("themdanhmuc")
+	/*@PostMapping("themdanhmuc")
 	 @ResponseBody
 	 public void themsanpham(@RequestParam String tendanhmuc ) {
 		 DanhMuc danhMuc= new DanhMuc();
@@ -98,7 +98,7 @@ public class ApiController {
 		 danhMuc.setTendanhmuc(tendanhmuc);
 		 danhMuccSeviceImpl.capnhatdanhmuc(danhMuc);
 		 return danhMuc;
-	 }
+	 }*/
 //	------------------------------------------- upload file
 	 @Autowired
 	 ServletContext context;

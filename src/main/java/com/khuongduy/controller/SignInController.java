@@ -42,14 +42,24 @@ public class SignInController
 	@Autowired
 	LogInController logInController;
 	
-	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	@RequestMapping(value = "/signin", method = {RequestMethod.GET,RequestMethod.POST})
 	public String signIn()
 	{
-		if(logInController.checklogin) {
+//		if(logInController.checklogin) {
 			return "adminsignin";
-		}else {
+		/*}else {
 			return "redirect:login";
-		}
+		}*/
+		
+	}
+	@RequestMapping(value = "/chuyenlink", method = {RequestMethod.GET,RequestMethod.POST})
+	public String chuyenlink()
+	{
+//		if(logInController.checklogin) {
+		return "redirect:signin";
+		/*}else {
+			
+		}*/
 		
 	}
 

@@ -6,9 +6,9 @@ import com.khuongduy.entity.DanhMuc;
 
 
 public interface DanhMucSevice {
-	List<DanhMuc> fileall();
-	DanhMuc dsdmtheoma(int madanhmuc);
-	boolean themdanhmuc(DanhMuc danhMuc);
-	boolean capnhatdanhmuc(DanhMuc danhMuc);
-	boolean xoadanhmuc(int madanhmuc);
+	List<DanhMuc> fileall() throws Exception;
+	DanhMuc dsdmtheoma(int madanhmuc)throws Exception;
+	boolean themdanhmuc(DanhMuc danhMuc)throws Exception;
+	boolean capnhatdanhmuc(DanhMuc danhMuc)throws Exception;
+	boolean xoadanhmuc(int madanhmuc)throws Exception;
 }

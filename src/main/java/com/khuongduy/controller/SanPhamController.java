@@ -34,8 +34,8 @@ public class SanPhamController {
 		List<SanPham> sanPhams=sanPhamSeviceImpl.fileall();
 		model.addAttribute("listSphanPhams", sanPhams);
 		
-		List<DanhMuc> danhMucs=danhMuccSeviceImpl.fileall();
-		model.addAttribute("danhmuc", danhMucs);
+		/*List<DanhMuc> danhMucs=danhMuccSeviceImpl.fileall();
+		model.addAttribute("danhmuc", danhMucs);*/
 		return "themsanpham";
 		}
 }

@@ -6,8 +6,10 @@ import java.sql.SQLException;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.khuongduy.business.LonginBusiness;
 import com.khuongduy.entity.ObjCheck;
+import com.khuongduy.entity.Users;
 import com.khuongduy.service.impl.UsersSeviceImpl;
 
 
@@ -38,29 +41,26 @@ public class LogInController {
 	@RequestMapping(value = "/checklogin", method = RequestMethod.POST)
 	@ResponseBody
 	public ObjCheck xacThucEnail(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam String email,@RequestParam String pass, Model model)
+			@RequestParam String email,@RequestParam String pass,HttpSession session, Model model)
 			throws SQLException, AddressException, MessagingException
 	{
 		ObjCheck objCheck = new ObjCheck();
 		try
 		{
-			String email1="khuongduy885@gmail.com";
-			String pass1="12345678";
-		
-			if(email1.equals(email) && pass.equals(pass1)){
+			Users users = longinBusiness.kiemtradangnhap(email, pass);		
+			if(users.getEmail() !=null ||"".equals(users.getEmail())){
 				objCheck.setStatus(1);
 				objCheck.setSuccess("đăng nhập thành công !");
-				checklogin =true;
+				Cookie[] cookie= request.getCookies();
+				session.setAttribute("checklogin", cookie[0].getValue());
 			}else {
 				objCheck.setStatus(0);
 				objCheck.setSuccess("email hoặc pass k đúng !");
-				checklogin =false;
 			}
 		} catch (Exception e)
 		{	
 			objCheck.setStatus(0);
-			objCheck.setSuccess("không gửi được email" + e);
-			checklogin =false;
+			objCheck.setSuccess(e.getMessage());
 			return objCheck;
 		}
 		return objCheck;

@@ -20,7 +20,7 @@ public class UsersSeviceImpl implements UsersSevice {
 	public boolean themnhanvien(Users users) throws SQLException {
 		return usersDaoImpl.themnhanvien(users);
 	}
-	public Users kiemtradangnhap(String username, String pass) {
+	public Users kiemtradangnhap(String username, String pass) throws Exception {
 		return usersDaoImpl.kiemtradangnhap(username, pass);
 	}
 	public List<Users> fileall() {

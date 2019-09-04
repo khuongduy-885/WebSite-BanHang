@@ -10,11 +10,11 @@ function btnSave1() {
 				pass:pass,
 			},
 			success : function(data) {
-				if (data.status ==0) {
-					alert(data.success);
-				}else{
-					alert(data.success);
+					if (data.status ==0) {
+						alert(data.success);
+					}else{
+						alert(data.success);
+					}
 				}
-			}
 		})
 };

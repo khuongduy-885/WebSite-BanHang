@@ -6,7 +6,7 @@ import java.util.List;
 import com.khuongduy.entity.Users;
 
 public interface UsersSevice {
-	Users kiemtradangnhap(String username, String pass);
+	Users kiemtradangnhap(String username, String pass) throws SQLException, Exception;
 	List<Users> fileall();
 	Users nhanvientheoma(int userid);
 	boolean themnhanvien(Users users) throws SQLException;

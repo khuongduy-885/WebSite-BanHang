@@ -13,27 +13,27 @@ import com.khuongduy.sevice.DanhMucSevice;
 public class DanhMuccSeviceImpl implements DanhMucSevice  {
 	@Autowired
 	private DanhMucDaoImpl danhMucDaoImpl;
-	public List<DanhMuc> fileall() {
+	public List<DanhMuc> fileall() throws Exception {
 		
 		return danhMucDaoImpl.fileall();
 	}
 
-	public DanhMuc dsdmtheoma(int madanhmuc) {
+	public DanhMuc dsdmtheoma(int madanhmuc) throws Exception {
 		
 		return danhMucDaoImpl.dsdmtheoma(madanhmuc);
 	}
 
-	public boolean themdanhmuc(DanhMuc danhMuc) {
+	public boolean themdanhmuc(DanhMuc danhMuc) throws Exception {
 
 		return danhMucDaoImpl.themdanhmuc(danhMuc);
 	}
 
-	public boolean capnhatdanhmuc(DanhMuc danhMuc) {
+	public boolean capnhatdanhmuc(DanhMuc danhMuc) throws Exception {
 	
 		return danhMucDaoImpl.capnhatdanhmuc(danhMuc);
 	}
 
-	public boolean xoadanhmuc(int madanhmuc) {
+	public boolean xoadanhmuc(int madanhmuc)throws Exception {
 	
 		return danhMucDaoImpl.xoadanhmuc(madanhmuc);
 	}
