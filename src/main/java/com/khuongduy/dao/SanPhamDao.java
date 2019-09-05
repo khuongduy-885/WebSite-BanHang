@@ -5,11 +5,11 @@ import java.util.List;
 import com.khuongduy.entity.SanPham;
 
 public interface SanPhamDao {
-	List<SanPham> fileall();
-	List<SanPham> laydsSanPhamLimit(int sobatdau);
-	List<SanPham> LayDSSanDanhMuc(int madanhmuc);
-	SanPham sanphamtheoma(int masanpham);
-	boolean themsanpham(SanPham sanPham);
-	boolean capnhatsanpham(SanPham sanPham);
-	boolean xoasanpham(int masanpham);
+	List<SanPham> fileall()throws Exception;
+	List<SanPham> laydsSanPhamLimit(int sobatdau)throws Exception;
+	List<SanPham> LayDSSanDanhMuc(int madanhmuc)throws Exception;
+	SanPham sanphamtheoma(int masanpham)throws Exception;
+	boolean themsanpham(SanPham sanPham)throws Exception;
+	boolean capnhatsanpham(SanPham sanPham)throws Exception;
+	boolean xoasanpham(int masanpham) throws Exception;
 }

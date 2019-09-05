@@ -31,8 +31,8 @@ public class ChitietsanphamController {
 		List<ChiTietSanPham> listchitiet=chiTietSanPhamSeviceImpl.fileall();
 		model.addAttribute("listchitiet", listchitiet);
 		
-		List<SanPham> listsanpham=sanPhamSeviceImpl.fileall();
-		model.addAttribute("listsanpham", listsanpham);
+	/*	List<SanPham> listsanpham=sanPhamSeviceImpl.fileall();
+		model.addAttribute("listsanpham", listsanpham);*/
 		
 		
 		

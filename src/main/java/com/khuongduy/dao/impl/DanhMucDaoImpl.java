@@ -15,164 +15,204 @@ import org.springframework.stereotype.Repository;
 import com.khuongduy.dao.DanhMucDao;
 import com.khuongduy.entity.DanhMuc;
 
-
 @Repository
-public class DanhMucDaoImpl implements DanhMucDao {
-  
+public class DanhMucDaoImpl implements DanhMucDao
+{
+
 	@Resource(name = "dataSource")
 	private DataSource dataSource;
-	
-	public List<DanhMuc> fileall() throws Exception {
-		String query ="select madanhmuc,tendanhmuc from danhmuc";
+
+	public List<DanhMuc> fileall() throws Exception
+	{
+		String query = "select madanhmuc,tendanhmuc from danhmuc";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<DanhMuc> danhMucs= new ArrayList<DanhMuc>();
-		try {
+		List<DanhMuc> danhMucs = new ArrayList<DanhMuc>();
+		try
+		{
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
-			if(rs != null)
+			if (rs != null)
 			{
-				while(rs.next())
+				while (rs.next())
 				{
-					DanhMuc danhMuc= new DanhMuc();
+					DanhMuc danhMuc = new DanhMuc();
 					danhMuc.setMadanhmuc(rs.getInt("madanhmuc"));
 					danhMuc.setTendanhmuc(rs.getString("tendanhmuc"));
 					danhMucs.add(danhMuc);
 				}
-				}
-			
-		}  catch (Exception e) {
+			}
+
+		} catch (Exception e)
+		{
 			e.printStackTrace();
-			throw new Exception(e); 
-		} finally {
-			if(pstmt !=null) {
+			throw new Exception(e);
+		} finally
+		{
+			if (pstmt != null)
+			{
 				pstmt.close();
 			}
-			if(conn !=null) {
+			if (conn != null)
+			{
 				conn.close();
 			}
-			if(rs !=null) {
+			if (rs != null)
+			{
 				rs.close();
 			}
 		}
 		return danhMucs;
-		
+
 	}
 
-	public DanhMuc dsdmtheoma(int madanhmuc) throws Exception {
-		String query ="select madanhmuc,tendanhmuc from danhmuc where madanhmuc= (?)";
+	public DanhMuc dsdmtheoma(int madanhmuc) throws Exception
+	{
+		String query = "select madanhmuc,tendanhmuc from danhmuc where madanhmuc= (?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		DanhMuc danhMuc= new DanhMuc();
-		try {
+		DanhMuc danhMuc = new DanhMuc();
+		try
+		{
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1,madanhmuc);
+			pstmt.setInt(1, madanhmuc);
 			rs = pstmt.executeQuery();
-			if(rs != null)
+			if (rs != null)
 			{
-				while(rs.next())
+				while (rs.next())
 				{
 					danhMuc.setMadanhmuc(rs.getInt("madanhmuc"));
 					danhMuc.setTendanhmuc(rs.getString("tendanhmuc"));
 				}
-				}
-			
-		}  catch (Exception e) {
+			}
+
+		} catch (Exception e)
+		{
 			e.printStackTrace();
-		} finally {
-			if(pstmt !=null) {
+		} finally
+		{
+			if (pstmt != null)
+			{
 				pstmt.close();
 			}
-			if(conn !=null) {
+			if (conn != null)
+			{
 				conn.close();
 			}
-			if(rs !=null) {
+			if (rs != null)
+			{
 				rs.close();
 			}
 		}
 		return danhMuc;
 	}
 
-	public boolean themdanhmuc(DanhMuc danhMuc) throws Exception {
-		StringBuilder sql =new StringBuilder( "INSERT INTO danhmuc (tendanhmuc) VALUES (?)");
+	public boolean themdanhmuc(DanhMuc danhMuc) throws Exception
+	{
+		StringBuilder sql = new StringBuilder("INSERT INTO danhmuc (tendanhmuc) VALUES (?)");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		try {
+		int check=0;
+		try
+		{
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setString(1,danhMuc.getTendanhmuc());
-			pstmt.executeUpdate();
-			
-			if(danhMuc.getMadanhmuc() >0) {
+			pstmt.setString(1, danhMuc.getTendanhmuc());
+			check =pstmt.executeUpdate();
+			if (check != 0)
+			{
 				return true;
-			}else {
-				return false;
+			} 
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			if (pstmt != null)
+			{
+				pstmt.close();
 			}
-			}  catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(pstmt !=null) {
-					pstmt.close();
-				}
-				if(conn !=null) {
-					conn.close();
-				}
-				if(rs !=null) {
-					rs.close();
-				}
+			if (conn != null)
+			{
+				conn.close();
 			}
-			return false;
+			if (rs != null)
+			{
+				rs.close();
+			}
+		}
+		return false;
 	}
 
-	public boolean capnhatdanhmuc(DanhMuc danhMuc) throws Exception {
+	public boolean capnhatdanhmuc(DanhMuc danhMuc) throws Exception
+	{
 		String sql = "UPDATE danhmuc SET tendanhmuc = ? WHERE madanhmuc = ? ";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		try {
+		int check=0;
+		try
+		{
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setString(1,danhMuc.getTendanhmuc());
+			pstmt.setString(1, danhMuc.getTendanhmuc());
 			pstmt.setInt(2, danhMuc.getMadanhmuc());
-			pstmt.executeUpdate();
-			}  catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(pstmt !=null) {
-					pstmt.close();
-				}
-				if(conn !=null) {
-					conn.close();
-				}
+			check = pstmt.executeUpdate();
+			if(check  !=0) {
+				return true;
 			}
-		return true;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			if (pstmt != null)
+			{
+				pstmt.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		return false;
 	}
 
-	public boolean xoadanhmuc(int madanhmuc) throws Exception {
+	public boolean xoadanhmuc(int madanhmuc) throws Exception
+	{
 		String sql = "DELETE FROM danhmuc WHERE madanhmuc = ? ";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		DanhMuc danhMuc= new DanhMuc();
-		try {
+		int check=0;
+		try
+		{
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setInt(1, madanhmuc);
-			pstmt.executeUpdate();
-			}  catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(pstmt !=null) {
-					pstmt.close();
-				}
-				if(conn !=null) {
-					conn.close();
-				}
+			check=pstmt.executeUpdate();
+			if(check!=0) {
+				return true;
 			}
-		return true;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		} finally
+		{
+			if (pstmt != null)
+			{
+				pstmt.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		return false;
 	}
 
 }

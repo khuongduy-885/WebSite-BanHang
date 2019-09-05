@@ -144,79 +144,8 @@ public class ApiController {
 //				 return html;
 //			 }
 //----------------themsanpham---------------
-	 @GetMapping(path="xoasanphamtheoma",produces="plain/text; charset=UTF-8")
-	 @ResponseBody
-	 public String xoasanphamtheoma(@RequestParam int masanpham) {
-		 sanPhamSeviceImpl.xoasanpham(masanpham);
-		 return "";
-	 }
 	 
-	 @PostMapping("themsanpham")
-	 @ResponseBody
-	 public void themsanphamjson(@RequestParam String datajson) {
-		 ObjectMapper mapper = new ObjectMapper();
-		 JsonNode jsonobject;
-		 try {
-			 SanPham sanPham= new SanPham();
-			jsonobject =mapper.readTree(datajson);
-			sanPham.setMadanhmuc(jsonobject.get("danhmucsanpham").asInt());
-			sanPham.setTensanpham(jsonobject.get("tensanpham").asText());
-			sanPham.setGiatien(jsonobject.get("giatien").asText());
-			sanPham.setTinhtrang(jsonobject.get("tinhtrang").asText());
-			sanPham.setHinhanh(jsonobject.get("hinhanh").asText());
-			sanPham.setCauhinhmay(jsonobject.get("cauhinhmay").asText());
-			sanPham.setNgaynhap(jsonobject.get("ngaynhap").asText());
-			
-			sanPhamSeviceImpl.themsanpham(sanPham);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		 
-	 }
-	 
-	 @PostMapping("laysanphamtheoma")
-	 @ResponseBody
-	 public SanPham laysanphamtheoma(@RequestParam int masanpham) {
-		SanPham sanPham=sanPhamSeviceImpl.sanphamtheoma(masanpham);
-		sanPham.getTendanhmuc();
-		sanPham.getMadanhmuc();
-		sanPham.getTensanpham();
-		sanPham.getHinhanh();
-		sanPham.getGiatien();
-		sanPham.getTinhtrang();
-		sanPham.getCauhinhmay();
-		sanPham.getNgaynhap();
-		 return sanPham;
-		 
-	 }
-	 
-	 @PostMapping("capnhatsanpham")
-	 @ResponseBody
-	 public void capnhatsanphamjson(@RequestParam String datajson) {
-		 ObjectMapper mapper = new ObjectMapper();
-		 JsonNode jsonobject;
-		 try {
-			 SanPham sanPham= new SanPham();
-			jsonobject =mapper.readTree(datajson);
-			sanPham.setMadanhmuc(jsonobject.get("danhmucsanpham").asInt());
-			sanPham.setTensanpham(jsonobject.get("tensanpham").asText());
-			sanPham.setGiatien(jsonobject.get("giatien").asText());
-			sanPham.setTinhtrang(jsonobject.get("tinhtrang").asText());
-			sanPham.setHinhanh(jsonobject.get("hinhanh").asText());
-			sanPham.setCauhinhmay(jsonobject.get("cauhinhmay").asText());
-			sanPham.setNgaynhap(jsonobject.get("ngaynhap").asText());
-			sanPham.setMasanpham(jsonobject.get("masanpham").asInt());
-			sanPhamSeviceImpl.capnhatsanpham(sanPham);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		 
-	 }
-	 //------------------------chitietsanpham------------------
+	/* //------------------------chitietsanpham------------------
 	 @PostMapping("themchitietsanpham")
 	 @ResponseBody
 	 public void themchitietsanpham(@RequestParam String datajson) {
@@ -280,7 +209,7 @@ public class ApiController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
-		 }
+		 }*/
 //---------------------------------themnhanvien--------------------
 		 /*@PostMapping("themnhanvien")
 		 @ResponseBody

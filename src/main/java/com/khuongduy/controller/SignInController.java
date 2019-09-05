@@ -46,7 +46,6 @@ public class SignInController
 	public String signIn()
 	{
 			return "adminsignin";
-		
 	}
 	@RequestMapping(value = "/xacthucmail", method = RequestMethod.POST)
 	@ResponseBody
